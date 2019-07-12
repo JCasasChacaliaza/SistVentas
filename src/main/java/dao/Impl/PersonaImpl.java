@@ -3,7 +3,10 @@ package dao.Impl;
 import dao.Conexion;
 import dao.crud;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import modelo.Persona;
 
@@ -66,13 +69,29 @@ public class PersonaImpl extends Conexion implements crud<Persona> {
     @Override
     public List<Persona> ListModelo() throws Exception {
         List<Persona> listado;
-        
-        
-        
-        
-        
-        
-        
-        
+        ResultSet rs;
+        try {
+            String sql = "select * from persona where estper='A'";
+            listado = new ArrayList<>();
+            Statement st = getConectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Persona per = new Persona();
+                per.setCodPer(rs.getString("IDPER"));
+                per.setNomPer(rs.getString("NOMPER"));
+                per.setApePer(rs.getString("APEPER"));
+                per.setDniPer(rs.getString("DNIPER"));
+                per.setTelPer(rs.getString("TELPER"));
+                per.setSexPer(rs.getString("SEXPER"));
+                listado.add(per);
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            cerrar();
+        }
+        return listado;
     }
+
 }

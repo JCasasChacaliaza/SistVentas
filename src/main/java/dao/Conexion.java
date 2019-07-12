@@ -13,7 +13,7 @@ public class Conexion {
             if (conectar == null) {
 
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                conectar = DriverManager.getConnection("jdbc:sqlserver://MARPI; database=demo", "usuarioSQL", "ads_thony");
+                conectar = DriverManager.getConnection("jdbc:sqlserver://PC31; database=DEMO", "admin", "admin");
             }
 
         } catch (ClassNotFoundException | SQLException e) {
